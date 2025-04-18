@@ -8,7 +8,6 @@ from nltk.stem import PorterStemmer
 from nltk.data import find
 
 # Safe download checker
-@st.cache_data
 def download_nltk_resources():
     try:
         find('tokenizers/punkt')
@@ -20,8 +19,8 @@ def download_nltk_resources():
     except LookupError:
         nltk.download('stopwords')
 
+# Explicitly download NLTK resources on startup
 download_nltk_resources()
-
 
 ps = PorterStemmer()
 
