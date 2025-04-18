@@ -5,9 +5,23 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-# Download necessary NLTK data
-nltk.download('punkt')
-nltk.download('stopwords')
+from nltk.data import find
+
+# Safe download checker
+@st.cache_data
+def download_nltk_resources():
+    try:
+        find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
+
+    try:
+        find('corpora/stopwords')
+    except LookupError:
+        nltk.download('stopwords')
+
+download_nltk_resources()
+
 
 ps = PorterStemmer()
 
